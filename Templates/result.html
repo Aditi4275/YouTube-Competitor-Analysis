@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Result</title>
+</head>
+<body>
+    <h1>Channels in Niche: {{ niche }}</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Subscribers</th>
+                <th>Video Count</th>
+                <th>View Count</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for channel in df %}
+            <tr>
+                <td>{{ channel.title }}</td>
+                <td>{{ channel.subscribers }}</td>
+                <td>{{ channel.video_count }}</td>
+                <td>{{ channel.view_count }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>Generate Chart</h2>
+    <form action="/generate_chart" method="post">
+        <input type="hidden" name="niche" value="{{ niche }}">
+        <label for="chart_type">Select Chart Type:</label>
+        <select name="chart_type" id="chart_type">
+            <option value="subscribers">Subscribers</option>
+            <option value="video_count">Video Count</option>
+            <option value="view_count">View Count</option>
+        </select>
+        <button type="submit">Generate Chart</button>
+    </form>
+</body>
+</html>
